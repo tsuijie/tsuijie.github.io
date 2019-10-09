@@ -52,8 +52,10 @@ systemctl restart network
 git clone https://github.com/jpetazzo/pipework
 cp pipework/pipework /usr/local/bin/
 
+'DOCKER_NETWORK_OPTIONS="-b=none"' > /etc/sysconfig/docker-network
+
 # 网络模式使用none
-docker run -itd --net=none --name test centos bash
+docker run -itd --net=none -b=none --name test centos bash
 
 # 使用pipework配置网络地址，注意不要和宿主机网络内的其他设备地址冲突即可
 pipework br0 docker_bridge 192.168.31.159/24
